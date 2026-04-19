@@ -3,6 +3,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Initialize OpenTelemetry/SigNoz before other imports
+from open_notebook.utils.telemetry import init_telemetry
+init_telemetry()
+
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
