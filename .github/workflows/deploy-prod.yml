@@ -1,0 +1,85 @@
+name: Deploy to Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Deploy target'
+        required: true
+        default: 'book'
+        type: choice
+        options:
+          - book
+          - notebook
+          - api
+      action:
+        description: 'Action'
+        required: true
+        default: 'deploy'
+        type: choice
+        options:
+          - deploy
+          - restart
+          - pull
+          - logs
+
+env:
+  SSH_HOST: ${{ secrets.SSH_HOST }}
+  SSH_USER: ${{ secrets.SSH_USER }}
+  SSH_KEY: ${{ secrets.SSH_KEY }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          echo "${{ secrets.SSH_KEY }}" > ssh_key
+          chmod 600 ssh_key
+          
+      - name: Deploy to book.agnxxt.com
+        if: github.event.inputs.target == 'book'
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ssh_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            cd /app/book
+            docker compose pull
+            docker compose up -d --build
+            docker system prune -f
+          "
+
+      - name: Deploy to notebook.agnxxt.com
+        if: github.event.inputs.target == 'notebook'
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ssh_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            cd /app/notebook
+            docker compose pull
+            docker compose up -d --build
+          "
+
+      - name: Restart service
+        if: github.event.inputs.action == 'restart'
+        run: |
+          TARGET=${{ github.event.inputs.target }}
+          ssh -o StrictHostKeyChecking=no -i ssh_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            docker restart \$TARGET
+          "
+
+      - name: Pull latest
+        if: github.event.inputs.action == 'pull'
+        run: |
+          TARGET=${{ github.event.inputs.target }}
+          ssh -o StrictHostKeyChecking=no -i ssh_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            cd /app/\$TARGET
+            docker compose pull
+          "
+
+      - name: Show logs
+        if: github.event.inputs.action == 'logs'
+        run: |
+          TARGET=${{ github.event.inputs.target }}
+          ssh -o StrictHostKeyChecking=no -i ssh_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            docker logs --tail 50 \$TARGET
+          "

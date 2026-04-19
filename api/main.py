@@ -28,6 +28,7 @@ from open_notebook.exceptions import (
 )
 from api.routers import (
     auth,
+    auth_service,
     chat,
     config,
     context,
@@ -262,6 +263,7 @@ async def open_notebook_error_handler(request: Request, exc: OpenNotebookError):
 
 # Include routers
 app.include_router(auth.router, prefix="/api", tags=["auth"])
+app.include_router(auth_service.router, prefix="/api", tags=["auth-service"])
 app.include_router(config.router, prefix="/api", tags=["config"])
 app.include_router(notebooks.router, prefix="/api", tags=["notebooks"])
 app.include_router(search.router, prefix="/api", tags=["search"])

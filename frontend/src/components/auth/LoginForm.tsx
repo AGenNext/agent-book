@@ -10,176 +10,98 @@ import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { AlertCircle } from 'lucide-react'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
-import { useTranslation } from '@/lib/hooks/use-translation'
 
 export function LoginForm() {
-  const { t, language } = useTranslation()
   const [password, setPassword] = useState('')
   const { login, isLoading, error } = useAuth()
-  const { authRequired, checkAuthRequired, hasHydrated, isAuthenticated } = useAuthStore()
+  const { authRequired, checkAuthRequired, hasHydrated } = useAuthStore()
   const [isCheckingAuth, setIsCheckingAuth] = useState(true)
-  const [configInfo, setConfigInfo] = useState<{ apiUrl: string; version: string; buildTime: string } | null>(null)
+  const [configInfo, setConfigInfo] = useState<{ apiUrl: string; version: string } | null>(null)
   const router = useRouter()
+  
+  // Signup state
+  const [isSignup, setIsSignup] = useState(false)
+  const [email, setEmail] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [signupError, setSignupError] = useState('')
+  const [signupSuccess, setSignupSuccess] = useState(false)
+  const [allowSignup, setAllowSignup] = useState(false)
 
-  // Load config info for debugging
   useEffect(() => {
-    getConfig().then(cfg => {
-      setConfigInfo({
-        apiUrl: cfg.apiUrl,
-        version: cfg.version,
-        buildTime: cfg.buildTime,
-      })
-    }).catch(err => {
-      console.error('Failed to load config:', err)
-    })
+    getConfig().then(cfg => setConfigInfo({ apiUrl: cfg.apiUrl, version: cfg.version })).catch(() => {})
   }, [])
 
-  // Check if authentication is required on mount
   useEffect(() => {
-    if (!hasHydrated) {
-      return
-    }
+    if (!hasHydrated) return
+    checkAuthRequired().then(required => {
+      if (!required) router.push('/notebooks')
+      else setIsCheckingAuth(false)
+    }).catch(() => setIsCheckingAuth(false))
+  }, [hasHydrated])
 
-    const checkAuth = async () => {
-      try {
-        const required = await checkAuthRequired()
-
-        // If auth is not required, redirect to notebooks
-        if (!required) {
-          router.push('/notebooks')
-        }
-      } catch (error) {
-        console.error('Error checking auth requirement:', error)
-        // On error, assume auth is required to be safe
-      } finally {
-        setIsCheckingAuth(false)
-      }
-    }
-
-    // If we already know auth status, use it
-    if (authRequired !== null) {
-      if (!authRequired && isAuthenticated) {
-        router.push('/notebooks')
-      } else {
-        setIsCheckingAuth(false)
-      }
-    } else {
-      void checkAuth()
-    }
-  }, [hasHydrated, authRequired, checkAuthRequired, router, isAuthenticated])
-
-  // Show loading while checking if auth is required
-  if (!hasHydrated || isCheckingAuth) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <LoadingSpinner />
-      </div>
-    )
-  }
-
-  // If we still don't know if auth is required (connection error), show error
-  if (authRequired === null) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <CardTitle>{t('common.connectionError')}</CardTitle>
-            <CardDescription>
-              {t('common.unableToConnect')}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-start gap-2 text-red-600 text-sm">
-                <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <div className="flex-1">
-                  {error || t('auth.connectErrorHint')}
-                </div>
-              </div>
-
-              {configInfo && (
-                <div className="space-y-2 text-xs text-muted-foreground border-t pt-3">
-                  <div className="font-medium">{t('common.diagnosticInfo')}:</div>
-                  <div className="space-y-1 font-mono">
-                    <div>{t('common.version')}: {configInfo.version}</div>
-                    <div>{t('common.built')}: {new Date(configInfo.buildTime).toLocaleString(language === 'zh-CN' ? 'zh-CN' : language === 'zh-TW' ? 'zh-TW' : 'en-US')}</div>
-                    <div className="break-all">{t('common.apiUrl')}: {configInfo.apiUrl}</div>
-                    <div className="break-all">{t('common.frontendUrl')}: {typeof window !== 'undefined' ? window.location.href : 'N/A'}</div>
-                  </div>
-                  <div className="text-xs pt-2">
-                    {t('common.checkConsoleLogs')}
-                  </div>
-                </div>
-              )}
-
-              <Button
-                onClick={() => window.location.reload()}
-                className="w-full"
-              >
-                {t('common.retryConnection')}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    )
-  }
+  useEffect(() => {
+    fetch('/api/auth/config').then(r => r.json()).then(cfg => setAllowSignup(cfg.allow_signup === true)).catch(() => {})
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (password.trim()) {
+    setSignupError('')
+    
+    if (isSignup) {
+      if (password !== confirmPassword) { setSignupError('Passwords do not match'); return }
+      if (password.length < 8) { setSignupError('Password must be at least 8 characters'); return }
       try {
-        await login(password)
-      } catch (error) {
-        console.error('Unhandled error during login:', error)
-        // The auth store should handle most errors, but this catches any unhandled ones
-      }
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        })
+        const data = await res.json()
+        if (!res.ok) { setSignupError(data.detail || 'Signup failed'); return }
+        setSignupSuccess(true)
+        setIsSignup(false)
+        setEmail(''); setPassword(''); setConfirmPassword('')
+      } catch (e: any) { setSignupError(e.message || 'Signup failed') }
+    } else {
+      await login(password)
     }
   }
 
+  if (isCheckingAuth || !hasHydrated) {
+    return <div className="flex items-center justify-center min-h-[400px]"><LoadingSpinner /></div>
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
+      <Card className="w-full max-w-md border-slate-700 bg-slate-800/50">
         <CardHeader className="text-center">
-          <CardTitle>{t('auth.loginTitle')}</CardTitle>
-          <CardDescription>
-            {t('auth.loginDesc')}
-          </CardDescription>
+          <div className="mx-auto w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-3xl mb-4">📚</div>
+          <CardTitle className="text-2xl font-bold">AgentBook</CardTitle>
+          <CardDescription>{isSignup ? 'Create your account' : 'Enter your password'}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Input
-                type="password"
-                placeholder={t('auth.passwordPlaceholder')}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={isLoading}
-              />
-            </div>
-
-            {error && (
-              <div className="flex items-center gap-2 text-red-600 text-sm">
-                <AlertCircle className="h-4 w-4" />
-                {error}
-              </div>
+            {isSignup && (
+              <Input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required className="bg-slate-700 border-slate-600" />
             )}
-
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={isLoading || !password.trim()}
-            >
-              {isLoading ? t('auth.signingIn') : t('auth.signIn')}
+            <Input type="password" placeholder={isSignup ? "Create password" : "Password"} value={password} onChange={e => setPassword(e.target.value)} required className="bg-slate-700 border-slate-600" />
+            {isSignup && (
+              <Input type="password" placeholder="Confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required className="bg-slate-700 border-slate-600" />
+            )}
+            {(error || signupError) && (
+              <div className="flex items-center gap-2 text-red-400 text-sm"><AlertCircle className="w-4 h-4" />{error || signupError}</div>
+            )}
+            {signupSuccess && <div className="text-green-400 text-sm">Account created! Please log in.</div>}
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? <LoadingSpinner /> : (isSignup ? 'Sign Up' : 'Sign In')}
             </Button>
-
-            {configInfo && (
-              <div className="text-xs text-center text-muted-foreground pt-2 border-t">
-                <div>{t('common.version')} {configInfo.version}</div>
-                <div className="font-mono text-[10px]">{configInfo.apiUrl}</div>
-              </div>
+            {allowSignup && (
+              <button type="button" onClick={() => { setIsSignup(!isSignup); setSignupError(''); setSignupSuccess(false); }} className="w-full text-center text-sm text-slate-400 hover:text-slate-300">
+                {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
+              </button>
             )}
           </form>
+          {configInfo && <div className="mt-4 pt-4 border-t border-slate-700 text-xs text-slate-500 text-center">{configInfo.apiUrl} • v{configInfo.version}</div>}
         </CardContent>
       </Card>
     </div>
