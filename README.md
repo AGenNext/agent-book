@@ -15,10 +15,10 @@
     <img src="docs/assets/hero.svg" alt="Logo">
   </a>
 
-  <h3 align="center">Open Notebook</h3>
+  <h3 align="center">Autonomyx AgentBook</h3>
 
   <p align="center">
-    An open source, privacy-focused alternative to Google's Notebook LM!
+    Enterprise Knowledge Workspace for trusted, source-grounded intelligence.
     <br /><strong>Join our <a href="https://discord.gg/37XJPXfz2w">Discord server</a> for help, to share workflow ideas, and suggest features!</strong>
     <br />
     <a href="https://www.open-notebook.ai"><strong>Checkout our website »</strong></a>
@@ -50,22 +50,22 @@
   <a href="https://zdoc.app/zh/lfnovo/open-notebook">中文</a>
 </div>
 
-## A private, multi-model, 100% local, full-featured alternative to Notebook LM
+## Autonomyx AgentBook — Enterprise Knowledge Workspace
 
 ![New Notebook](docs/assets/asset_list.png)
 
 In a world dominated by Artificial Intelligence, having the ability to think 🧠 and acquire new knowledge 💡, is a skill that should not be a privilege for a few, nor restricted to a single provider.
 
-**Open Notebook empowers you to:**
+**Autonomyx AgentBook helps teams:**
 - 🔒 **Control your data** - Keep your research private and secure
 - 🤖 **Choose your AI models** - Support for 18+ providers including OpenAI, Anthropic, Ollama, LM Studio, and more
 - 📚 **Organize multi-modal content** - PDFs, videos, audio, web pages, and more
-- 🎙️ **Generate professional podcasts** - Advanced multi-speaker podcast generation
+- 🧭 **Preserve project memory** - Timeline, notes, and activity for continuity across teams
 - 🔍 **Search intelligently** - Full-text and vector search across all your content
-- 💬 **Chat with context** - AI conversations powered by your research
+- 💬 **Grounded chat with citations** - Every material answer is tied to inspectable evidence
 - 🌐 **Multi-language UI** - English, Portuguese, Chinese (Simplified & Traditional), Japanese, Russian, and Bengali support
 
-Learn more about our project at [https://www.open-notebook.ai](https://www.open-notebook.ai)
+Tagline: **Trusted answers. Reusable intelligence. Grounded in your sources.**
 
 ---
 

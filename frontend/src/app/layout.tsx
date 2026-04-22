@@ -12,8 +12,8 @@ import { I18nProvider } from "@/components/providers/I18nProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Open Notebook",
-  description: "Privacy-focused research and knowledge management",
+  title: "Autonomyx AgentBook",
+  description: "Trusted answers. Reusable intelligence. Grounded in your sources.",
 };
 
 export default function RootLayout({

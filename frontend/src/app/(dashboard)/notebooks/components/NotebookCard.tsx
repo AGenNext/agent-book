@@ -5,7 +5,7 @@ import { NotebookResponse } from '@/lib/types/api'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { MoreHorizontal, Archive, ArchiveRestore, Trash2, FileText, StickyNote } from 'lucide-react'
+import { MoreHorizontal, Archive, ArchiveRestore, Copy, Trash2, FileText, StickyNote } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import {
   DropdownMenu,
@@ -13,7 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { useUpdateNotebook } from '@/lib/hooks/use-notebooks'
+import { useCreateNotebook, useUpdateNotebook } from '@/lib/hooks/use-notebooks'
 import { NotebookDeleteDialog } from './NotebookDeleteDialog'
 import { useState } from 'react'
 import { useTranslation } from '@/lib/hooks/use-translation'
@@ -27,6 +27,7 @@ export function NotebookCard({ notebook }: NotebookCardProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const router = useRouter()
   const updateNotebook = useUpdateNotebook()
+  const createNotebook = useCreateNotebook()
 
   const handleArchiveToggle = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -36,6 +37,14 @@ export function NotebookCard({ notebook }: NotebookCardProps) {
     })
   }
 
+
+  const handleDuplicate = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    await createNotebook.mutateAsync({
+      name: `${notebook.name} (Copy)`,
+      description: notebook.description || undefined,
+    })
+  }
   const handleCardClick = () => {
     router.push(`/notebooks/${encodeURIComponent(notebook.id)}`)
   }
@@ -84,6 +93,11 @@ export function NotebookCard({ notebook }: NotebookCardProps) {
                         {t('notebooks.archive')}
                       </>
                     )}
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem onClick={handleDuplicate}>
+                    <Copy className="h-4 w-4 mr-2" />
+                    {t('workspace.duplicate')}
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={(e) => {
