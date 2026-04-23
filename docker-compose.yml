@@ -3,10 +3,10 @@ services:
     image: surrealdb/surrealdb:v2
     command: start --log info --user root --pass root rocksdb:/mydata/mydatabase.db
     user: root
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     volumes:
-      - ./surreal_data:/mydata
+      - surreal_data:/mydata
     environment:
       - SURREAL_EXPERIMENTAL_GRAPHQL=true
     restart: always
@@ -27,7 +27,11 @@ services:
       - SURREAL_NAMESPACE=autonomyx_agentbook
       - SURREAL_DATABASE=autonomyx_agentbook
     volumes:
-      - ./notebook_data:/app/data
+      - notebook_data:/app/data
     depends_on:
       - surrealdb
     restart: always
+
+volumes:
+  surreal_data:
+  notebook_data:
