@@ -2,7 +2,7 @@ services:
   surrealdb:
     image: surrealdb/surrealdb:v2
     command: start --log info --user root --pass root rocksdb:/mydata/mydatabase.db
-    user: root  # Required for bind mounts on Linux
+    user: root
     ports:
       - "8000:8000"
     volumes:
@@ -10,38 +10,24 @@ services:
     environment:
       - SURREAL_EXPERIMENTAL_GRAPHQL=true
     restart: always
-    healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:8000/ || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
+    pull_policy: always
 
-  agentbook:
-    image: agentnxt/agentbook:v1-latest
+  autonomyx_agentbook:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "8502:8502"  # Web UI
-      - "5055:5055"  # REST API
+      - "8502:8502"
+      - "5055:5055"
     environment:
-      # REQUIRED: Change this to your own secret string
-      # This encrypts your API keys in the database
-      - OPEN_NOTEBOOK_ENCRYPTION_KEY=change-me-to-a-secret-string
-
-      # Database connection (default values - no need to change)
+      - OPEN_NOTEBOOK_ENCRYPTION_KEY=${OPEN_NOTEBOOK_ENCRYPTION_KEY}
       - SURREAL_URL=ws://surrealdb:8000/rpc
       - SURREAL_USER=root
       - SURREAL_PASSWORD=root
-      - SURREAL_NAMESPACE=agentbook
-      - SURREAL_DATABASE=agentbook
+      - SURREAL_NAMESPACE=autonomyx_agentbook
+      - SURREAL_DATABASE=autonomyx_agentbook
     volumes:
       - ./notebook_data:/app/data
     depends_on:
-      surrealdb:
-        condition: service_healthy
+      - surrealdb
     restart: always
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5055/health"]
-      interval: 15s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
