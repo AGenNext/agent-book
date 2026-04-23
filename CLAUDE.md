@@ -1,10 +1,10 @@
-# Autonomyx AgentBook - Root CLAUDE.md
+# AgentBook - Root CLAUDE.md
 
-This file provides architectural guidance for contributors working on Autonomyx AgentBook at the project level.
+This file provides architectural guidance for contributors working on AgentBook at the project level.
 
 ## Project Overview
 
-**Autonomyx AgentBook** is an open-source, privacy-focused alternative to Google NotebookLM. It's an AI-powered research assistant enabling users to upload multi-modal content (PDFs, audio, video, web pages), generate intelligent notes, search semantically, chat with AI models, and produce professional podcasts—all with complete control over data and choice of AI providers.
+**AgentBook** is an open-source, privacy-focused alternative to Google NotebookLM. It's an AI-powered research assistant enabling users to upload multi-modal content (PDFs, audio, video, web pages), generate intelligent notes, search semantically, chat with AI models, and produce professional podcasts—all with complete control over data and choice of AI providers.
 
 **Key Values**: Privacy-first, multi-provider AI support, fully self-hosted option, open-source transparency.
 
@@ -213,6 +213,6 @@ See dedicated CLAUDE.md files for detailed guidance:
 
 - **Documentation**: https://autonomyx.ai/agentbook
 - **Discord**: https://discord.gg/37XJPXfz2w
-- **Issues**: https://github.com/autonomyx/agentbook/issues
+- **Issues**: https://github.com/agentnxt/agentbook/issues
 - **License**: MIT (see LICENSE)
 

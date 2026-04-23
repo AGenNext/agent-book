@@ -32,7 +32,7 @@ export function useVersionCheck() {
           closeButton: true,
           action: {
             label: t('advanced.viewOnGithub'),
-            onClick: () => window.open('https://github.com/autonomyx/agentbook', '_blank'),
+            onClick: () => window.open('https://github.com/agentnxt/agentbook', '_blank'),
           },
           onDismiss: () => sessionStorage.setItem(dismissKey, 'true'),
         })

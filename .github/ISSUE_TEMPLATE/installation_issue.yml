@@ -10,7 +10,7 @@ body:
 
         **Please try these resources first:**
 
-        1. 🤖 **[Installation Assistant ChatGPT](https://chatgpt.com/g/autonomyx-agentbook-installation-assistant)** - Our AI assistant can help you troubleshoot most installation issues instantly!
+        1. 🤖 **[Installation Assistant ChatGPT](https://chatgpt.com/g/agentbook-installation-assistant)** - Our AI assistant can help you troubleshoot most installation issues instantly!
 
         2. 📚 **[Installation Guide](./docs/getting-started/installation.md)** - Comprehensive setup instructions
 
@@ -55,9 +55,9 @@ body:
         Please provide relevant logs. **This is very important for diagnosing issues!**
 
         **How to get logs:**
-        - Docker single container: `docker logs autonomyx-agentbook`
+        - Docker single container: `docker logs agentbook`
         - Docker Compose: `docker compose logs -f`
-        - Specific service: `docker compose logs -f autonomyx_agentbook`
+        - Specific service: `docker compose logs -f agentbook`
       placeholder: |
         Paste your logs here. Include the full error message and stack trace if available.
       render: shell
@@ -74,8 +74,8 @@ body:
         **⚠️ IMPORTANT: Redact any sensitive information (API keys, passwords, etc.)**
       placeholder: |
         services:
-          autonomyx_agentbook:
-            image: autonomyx/agentbook:v1-latest-single
+          agentbook:
+            image: agentnxt/agentbook:v1-latest-single
             ports:
               - "8502:8502"
               - "5055:5055"
@@ -138,7 +138,7 @@ body:
       label: Pre-submission Checklist
       description: Please confirm you've tried these steps
       options:
-        - label: I tried the [Installation Assistant ChatGPT](https://chatgpt.com/g/autonomyx-agentbook-installation-assistant)
+        - label: I tried the [Installation Assistant ChatGPT](https://chatgpt.com/g/agentbook-installation-assistant)
           required: false
         - label: I read the relevant documentation ([Installation Guide](./docs/getting-started/installation.md) or [Ollama Guide](./docs/features/ollama.md))
           required: false

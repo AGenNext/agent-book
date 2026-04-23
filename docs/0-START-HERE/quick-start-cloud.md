@@ -1,6 +1,6 @@
 # Quick Start - Cloud AI Providers (5 minutes)
 
-Get Autonomyx AgentBook running with **Anthropic, Google, Groq, or other cloud providers**. Same simplicity as OpenAI, with more choices.
+Get AgentBook running with **Anthropic, Google, Groq, or other cloud providers**. Same simplicity as OpenAI, with more choices.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ Get Autonomyx AgentBook running with **Anthropic, Google, Groq, or other cloud p
 
 ## Step 1: Create Configuration (1 min)
 
-Create a new folder `autonomyx-agentbook` and add this file:
+Create a new folder `agentbook` and add this file:
 
 **docker-compose.yml**:
 ```yaml
@@ -34,8 +34,8 @@ services:
     # Removed the healthcheck because the v2 image is too minimal to run wget/curl
     restart: always
 
-  autonomyx_agentbook:
-    image: autonomyx/agentbook:v1-latest
+  agentbook:
+    image: agentnxt/agentbook:v1-latest
     pull_policy: always
     ports:
       - "8502:8502"  # Web UI
@@ -45,8 +45,8 @@ services:
       - SURREAL_URL=ws://surrealdb:8000/rpc
       - SURREAL_USER=root
       - SURREAL_PASSWORD=password
-      - SURREAL_NAMESPACE=autonomyx_agentbook
-      - SURREAL_DATABASE=autonomyx_agentbook
+      - SURREAL_NAMESPACE=agentbook
+      - SURREAL_DATABASE=agentbook
     volumes:
       - ./notebook_data:/app/data
     depends_on:
@@ -62,7 +62,7 @@ services:
 
 ## Step 2: Start Services (1 min)
 
-Open terminal in your `autonomyx-agentbook` folder:
+Open terminal in your `agentbook` folder:
 
 ```bash
 docker compose up -d
@@ -72,14 +72,14 @@ Wait 15-20 seconds for services to start.
 
 ---
 
-## Step 3: Access Autonomyx AgentBook (instant)
+## Step 3: Access AgentBook (instant)
 
 Open your browser:
 ```
 http://localhost:8502
 ```
 
-You should see the Autonomyx AgentBook interface!
+You should see the AgentBook interface!
 
 ---
 

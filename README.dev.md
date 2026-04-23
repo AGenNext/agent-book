@@ -1,13 +1,13 @@
 # Developer Guide
 
-This guide is for developers working on Autonomyx AgentBook. For end-user documentation, see [README.md](README.md) and [docs/](docs/).
+This guide is for developers working on AgentBook. For end-user documentation, see [README.md](README.md) and [docs/](docs/).
 
 ## Quick Start for Development
 
 ```bash
 # 1. Clone and setup
-git clone https://github.com/autonomyx/agentbook.git
-cd autonomyx-agentbook
+git clone https://github.com/agentnxt/agentbook.git
+cd agentbook
 
 # 2. Copy environment files
 cp .env.example .env
@@ -135,13 +135,13 @@ make docker-build-local
 ```
 
 This creates two tags:
-- `autonomyx/agentbook:<version>` (from pyproject.toml)
-- `autonomyx/agentbook:local`
+- `agentnxt/agentbook:<version>` (from pyproject.toml)
+- `agentnxt/agentbook:local`
 
 ### Run Locally
 
 ```bash
-docker run -p 5055:5055 -p 3000:3000 autonomyx/agentbook:local
+docker run -p 5055:5055 -p 3000:3000 agentnxt/agentbook:local
 ```
 
 ### When to Use
@@ -246,7 +246,7 @@ cd frontend && npm install package-name
 
 ### Adding a New Language (i18n)
 
-Autonomyx AgentBook supports internationalization. To add a new language:
+AgentBook supports internationalization. To add a new language:
 
 1. **Create locale file**: Copy an existing locale as template
    ```bash
@@ -355,10 +355,10 @@ make docker-build-local
 ## Project Structure
 
 ```
-autonomyx-agentbook/
+agentbook/
 ├── api/                    # FastAPI backend
 ├── frontend/               # Next.js React frontend
-├── autonomyx_agentbook/          # Python core library
+├── agentbook/          # Python core library
 │   ├── domain/            # Domain models
 │   ├── graphs/            # LangGraph workflows
 │   ├── ai/                # AI provider integration
@@ -372,7 +372,7 @@ autonomyx-agentbook/
 See component-specific CLAUDE.md files for detailed architecture:
 - [frontend/CLAUDE.md](frontend/CLAUDE.md)
 - [api/CLAUDE.md](api/CLAUDE.md)
-- [autonomyx_agentbook/CLAUDE.md](autonomyx_agentbook/CLAUDE.md)
+- [agentbook/CLAUDE.md](agentbook/CLAUDE.md)
 
 ---
 
@@ -385,7 +385,7 @@ See component-specific CLAUDE.md files for detailed architecture:
 SURREAL_URL=ws://localhost:8000
 SURREAL_USER=root
 SURREAL_PASS=root
-SURREAL_DB=autonomyx_agentbook
+SURREAL_DB=agentbook
 SURREAL_NS=production
 
 # AI Provider (at least one required)
@@ -440,7 +440,7 @@ make clean-cache
 
 - **Documentation:** https://autonomyx.ai/agentbook
 - **Discord:** https://discord.gg/37XJPXfz2w
-- **Issues:** https://github.com/autonomyx/agentbook/issues
+- **Issues:** https://github.com/agentnxt/agentbook/issues
 - **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Maintainer Guide:** [MAINTAINER_GUIDE.md](MAINTAINER_GUIDE.md)
 

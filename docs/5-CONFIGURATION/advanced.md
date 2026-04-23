@@ -98,7 +98,7 @@ RUST_LOG=surrealdb=debug
 LOGLEVEL=langchain:debug
 
 # Only specific module
-RUST_LOG=autonomyx_agentbook::database=debug
+RUST_LOG=agentbook::database=debug
 ```
 
 ### LangSmith Tracing
@@ -109,7 +109,7 @@ For debugging LLM workflows:
 LANGCHAIN_TRACING_V2=true
 LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
 LANGCHAIN_API_KEY=your-key
-LANGCHAIN_PROJECT="Autonomyx AgentBook"
+LANGCHAIN_PROJECT="AgentBook"
 ```
 
 Then visit https://smith.langchain.com to see traces.
@@ -133,7 +133,7 @@ Edit `docker-compose.yml`:
 
 ```yaml
 services:
-  autonomyx-agentbook:
+  agentbook:
     ports:
       - "8001:8502"  # Change from 8502 to 8001
 ```
@@ -146,7 +146,7 @@ API auto-detects to: `http://localhost:5055` ✓
 
 ```yaml
 services:
-  autonomyx-agentbook:
+  agentbook:
     ports:
       - "127.0.0.1:8502:8502"  # Frontend
       - "5056:5055"            # Change API from 5055 to 5056
@@ -228,7 +228,7 @@ SURREAL_PASSWORD=$(openssl rand -base64 32)  # Generate secure password
 ### Add Password Protection
 
 ```env
-# Protect your Autonomyx AgentBook instance
+# Protect your AgentBook instance
 OPEN_NOTEBOOK_PASSWORD=your_secure_password
 ```
 
@@ -241,7 +241,7 @@ API_URL=https://mynotebook.example.com
 
 ### Firewall Rules
 
-Restrict access to your Autonomyx AgentBook:
+Restrict access to your AgentBook:
 - Port 8502 (frontend): Only from your IP
 - Port 5055 (API): Only from frontend
 - Port 8000 (SurrealDB): Never expose to internet
@@ -250,7 +250,7 @@ Restrict access to your Autonomyx AgentBook:
 
 ## Web Scraping & Content Extraction
 
-Autonomyx AgentBook uses multiple services for content extraction:
+AgentBook uses multiple services for content extraction:
 
 ### Firecrawl
 
@@ -430,20 +430,20 @@ BACKUP_DIR="/path/to/backups"
 DATE=$(date +%Y%m%d-%H%M%S)
 
 # Create backup
-tar -czf "$BACKUP_DIR/autonomyx-agentbook-$DATE.tar.gz" \
+tar -czf "$BACKUP_DIR/agentbook-$DATE.tar.gz" \
   /path/to/notebook_data \
   /path/to/surreal_data
 
 # Keep only last 7 days
-find "$BACKUP_DIR" -name "autonomyx-agentbook-*.tar.gz" -mtime +7 -delete
+find "$BACKUP_DIR" -name "agentbook-*.tar.gz" -mtime +7 -delete
 
-echo "Backup complete: autonomyx-agentbook-$DATE.tar.gz"
+echo "Backup complete: agentbook-$DATE.tar.gz"
 ```
 
 Add to cron:
 ```bash
 # Daily backup at 2 AM
-0 2 * * * /path/to/backup.sh >> /var/log/autonomyx-agentbook-backup.log 2>&1
+0 2 * * * /path/to/backup.sh >> /var/log/agentbook-backup.log 2>&1
 ```
 
 ### Restore
@@ -467,13 +467,13 @@ docker compose up -d
 ```bash
 # On source server
 docker compose down
-tar -czf autonomyx-agentbook-migration.tar.gz notebook_data/ surreal_data/
+tar -czf agentbook-migration.tar.gz notebook_data/ surreal_data/
 
 # Transfer to new server
-scp autonomyx-agentbook-migration.tar.gz user@newserver:/path/
+scp agentbook-migration.tar.gz user@newserver:/path/
 
 # On new server
-tar -xzf autonomyx-agentbook-migration.tar.gz
+tar -xzf agentbook-migration.tar.gz
 docker compose up -d
 ```
 

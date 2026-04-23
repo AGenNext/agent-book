@@ -1,6 +1,6 @@
 services:
-  autonomyx_agentbook_single:
-    # image: autonomyx/agentbook:v1-latest-single
+  agentbook_single:
+    # image: agentnxt/agentbook:v1-latest-single
     build:
       context: .
       dockerfile: Dockerfile.single
@@ -8,10 +8,12 @@ services:
       - "8502:8502"  # Next.js Frontend
       - "5055:5055"  # REST API
     env_file:
-      - ./docker.env
+      - .env
     environment:
       # Override for single-container mode: SurrealDB runs on localhost inside the same container
       - SURREAL_URL=ws://localhost:8000/rpc
+      - SURREAL_NAMESPACE=agentbook
+      - SURREAL_DATABASE=agentbook
     volumes:
       - ./notebook_data:/app/data          # Application data
       - ./surreal_single_data:/mydata      # SurrealDB data

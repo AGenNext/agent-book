@@ -1,14 +1,14 @@
 # Frequently Asked Questions
 
-Common questions about Autonomyx AgentBook usage, configuration, and best practices.
+Common questions about AgentBook usage, configuration, and best practices.
 
 ---
 
 ## General Usage
 
-### What is Autonomyx AgentBook?
+### What is AgentBook?
 
-Autonomyx AgentBook is an open-source, privacy-focused alternative to Google NotebookLM. It allows you to:
+AgentBook is an open-source, privacy-focused alternative to Google NotebookLM. It allows you to:
 - Create and manage research notebooks
 - Chat with your documents using AI
 - Generate podcasts from your content
@@ -22,7 +22,7 @@ Autonomyx AgentBook is an open-source, privacy-focused alternative to Google Not
 **Customization**: Open source, so you can modify and extend functionality
 **Control**: You control your data, models, and processing
 
-### Can I use Autonomyx AgentBook offline?
+### Can I use AgentBook offline?
 
 **Partially**: The application runs locally, but requires internet for:
 - AI model API calls (unless using local models like Ollama)
@@ -165,14 +165,14 @@ tar -xzf backup-20240101.tar.gz
 
 ## Technical Questions
 
-### Can I use Autonomyx AgentBook programmatically?
+### Can I use AgentBook programmatically?
 
-**Yes**: Autonomyx AgentBook provides a REST API:
+**Yes**: AgentBook provides a REST API:
 - Full API documentation at `http://localhost:5055/docs`
 - Support for all UI functionality
 - Authentication via password header
 
-### Can I run Autonomyx AgentBook in production?
+### Can I run AgentBook in production?
 
 **Yes**: Designed for production use with:
 - Docker deployment
@@ -241,7 +241,7 @@ Include:
 - System information
 - Configuration details (without API keys)
 
-Submit to: [GitHub Issues](https://github.com/autonomyx/agentbook/issues)
+Submit to: [GitHub Issues](https://github.com/agentnxt/agentbook/issues)
 
 ### Where can I get help?
 

@@ -67,8 +67,8 @@ services:
     # For GPU acceleration, use: ghcr.io/speaches-ai/speaches:latest-cuda
     # and add GPU device mapping (see docs)
 
-  autonomyx_agentbook:
-    image: autonomyx/agentbook:v1-latest
+  agentbook:
+    image: agentnxt/agentbook:v1-latest
     ports:
       - "8502:8502"
       - "5055:5055"
@@ -80,8 +80,8 @@ services:
       - SURREAL_URL=ws://surrealdb:8000/rpc
       - SURREAL_USER=root
       - SURREAL_PASSWORD=root
-      - SURREAL_NAMESPACE=autonomyx_agentbook
-      - SURREAL_DATABASE=autonomyx_agentbook
+      - SURREAL_NAMESPACE=agentbook
+      - SURREAL_DATABASE=agentbook
 
       # Ollama connection (optional, can also configure via UI)
       - OLLAMA_BASE_URL=http://ollama:11434
@@ -103,13 +103,13 @@ volumes:
 # ==========================================
 #
 # Ollama Models (LLM):
-#   docker exec autonomyx_agentbook-ollama-1 ollama pull mistral
-#   docker exec autonomyx_agentbook-ollama-1 ollama pull llama3.1
-#   docker exec autonomyx_agentbook-ollama-1 ollama pull qwen2.5
+#   docker exec agentbook-ollama-1 ollama pull mistral
+#   docker exec agentbook-ollama-1 ollama pull llama3.1
+#   docker exec agentbook-ollama-1 ollama pull qwen2.5
 #
 # Ollama Models (Embeddings):
-#   docker exec autonomyx_agentbook-ollama-1 ollama pull nomic-embed-text
-#   docker exec autonomyx_agentbook-ollama-1 ollama pull mxbai-embed-large
+#   docker exec agentbook-ollama-1 ollama pull nomic-embed-text
+#   docker exec agentbook-ollama-1 ollama pull mxbai-embed-large
 #
 # Speaches (TTS):
 #   docker compose exec speaches uv tool run speaches-cli model download speaches-ai/Kokoro-82M-v1.0-ONNX

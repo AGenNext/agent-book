@@ -6,7 +6,7 @@ All-in-one container setup. **Simpler than Docker Compose, but less flexible.**
 
 **Best for:** PikaPods, Railway, shared hosting, minimal setups
 
-> **Alternative Registry:** Images available on both Docker Hub (`autonomyx/agentbook:v1-latest-single`) and GitHub Container Registry (`ghcr.io/autonomyx/agentbook:v1-latest-single`).
+> **Alternative Registry:** Images available on both Docker Hub (`agentnxt/agentbook:v1-latest-single`) and GitHub Container Registry (`ghcr.io/agentnxt/agentbook:v1-latest-single`).
 
 ## Prerequisites
 
@@ -21,8 +21,8 @@ All-in-one container setup. **Simpler than Docker Compose, but less flexible.**
 ```yaml
 # docker-compose.yml
 services:
-  autonomyx_agentbook:
-    image: autonomyx/agentbook:v1-latest-single
+  agentbook:
+    image: agentnxt/agentbook:v1-latest-single
     pull_policy: always
     ports:
       - "8502:8502"  # Web UI (React frontend)
@@ -32,8 +32,8 @@ services:
       - SURREAL_URL=ws://localhost:8000/rpc
       - SURREAL_USER=root
       - SURREAL_PASSWORD=root
-      - SURREAL_NAMESPACE=autonomyx_agentbook
-      - SURREAL_DATABASE=autonomyx_agentbook
+      - SURREAL_NAMESPACE=agentbook
+      - SURREAL_DATABASE=agentbook
     volumes:
       - ./data:/app/data
     restart: always
@@ -56,27 +56,27 @@ Then configure your AI provider:
 
 **PikaPods:**
 1. Click "New App"
-2. Search "Autonomyx AgentBook"
+2. Search "AgentBook"
 3. Set environment variables (at minimum: `OPEN_NOTEBOOK_ENCRYPTION_KEY`)
 4. Click "Deploy"
 5. Open the app → Go to **Settings → API Keys** to configure your AI provider
 
 **Railway:**
 1. Create new project
-2. Add `autonomyx/agentbook:v1-latest-single`
+2. Add `agentnxt/agentbook:v1-latest-single`
 3. Set environment variables (at minimum: `OPEN_NOTEBOOK_ENCRYPTION_KEY`)
 4. Deploy
 5. Open the app → Go to **Settings → API Keys** to configure your AI provider
 
 **Render:**
 1. Create new Web Service
-2. Use Docker image: `autonomyx/agentbook:v1-latest-single`
+2. Use Docker image: `agentnxt/agentbook:v1-latest-single`
 3. Set environment variables in dashboard (at minimum: `OPEN_NOTEBOOK_ENCRYPTION_KEY`)
 4. Configure persistent disk for `/app/data` and `/mydata`
 
 **DigitalOcean App Platform:**
 1. Create new app from Docker Hub
-2. Use image: `autonomyx/agentbook:v1-latest-single`
+2. Use image: `agentnxt/agentbook:v1-latest-single`
 3. Set port to 8502
 4. Add environment variables (at minimum: `OPEN_NOTEBOOK_ENCRYPTION_KEY`)
 5. Configure persistent storage
@@ -91,7 +91,7 @@ heroku config:set OPEN_NOTEBOOK_ENCRYPTION_KEY=your-secret-key
 
 **Coolify:**
 1. Add new service → Docker Image
-2. Image: `autonomyx/agentbook:v1-latest-single`
+2. Image: `agentnxt/agentbook:v1-latest-single`
 3. Port: 8502
 4. Add environment variables (at minimum: `OPEN_NOTEBOOK_ENCRYPTION_KEY`)
 5. Enable persistent volumes
@@ -107,8 +107,8 @@ heroku config:set OPEN_NOTEBOOK_ENCRYPTION_KEY=your-secret-key
 | `SURREAL_URL` | Database | `ws://localhost:8000/rpc` |
 | `SURREAL_USER` | DB user | `root` |
 | `SURREAL_PASSWORD` | DB password | `root` |
-| `SURREAL_NAMESPACE` | DB namespace | `autonomyx_agentbook` |
-| `SURREAL_DATABASE` | DB name | `autonomyx_agentbook` |
+| `SURREAL_NAMESPACE` | DB namespace | `agentbook` |
+| `SURREAL_DATABASE` | DB name | `agentbook` |
 | `API_URL` | External URL (for remote access) | `https://myapp.example.com` |
 
 AI provider API keys are configured via the **Settings → API Keys** UI after deployment.

@@ -2,7 +2,7 @@
 
 Multi-container setup with separate services. **Best for most users.**
 
-> **Alternative Registry:** All images are available on both Docker Hub (`autonomyx/agentbook`) and GitHub Container Registry (`ghcr.io/autonomyx/agentbook`). Use GHCR if Docker Hub is blocked or you prefer GitHub-native workflows.
+> **Alternative Registry:** All images are available on both Docker Hub (`agentnxt/agentbook`) and GitHub Container Registry (`ghcr.io/agentnxt/agentbook`). Use GHCR if Docker Hub is blocked or you prefer GitHub-native workflows.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ Multi-container setup with separate services. **Best for most users.**
 
 **Option A: Download from repository**
 ```bash
-curl -o docker-compose.yml https://raw.githubusercontent.com/autonomyx/agentbook/main/docker-compose.yml
+curl -o docker-compose.yml https://raw.githubusercontent.com/agentnxt/agentbook/main/docker-compose.yml
 ```
 
 **Option B: Use the official file from the repo**
@@ -42,8 +42,8 @@ services:
     restart: always
     pull_policy: always
 
-  autonomyx_agentbook:
-    image: autonomyx/agentbook:v1-latest
+  agentbook:
+    image: agentnxt/agentbook:v1-latest
     ports:
       - "8502:8502"  # Web UI
       - "5055:5055"  # REST API
@@ -55,8 +55,8 @@ services:
       - SURREAL_URL=ws://surrealdb:8000/rpc
       - SURREAL_USER=root
       - SURREAL_PASSWORD=root
-      - SURREAL_NAMESPACE=autonomyx_agentbook
-      - SURREAL_DATABASE=autonomyx_agentbook
+      - SURREAL_NAMESPACE=agentbook
+      - SURREAL_DATABASE=agentbook
     volumes:
       - ./notebook_data:/app/data
     depends_on:
@@ -72,7 +72,7 @@ services:
 
 ## Step 2: Start Services (2 min)
 
-Open terminal in the `autonomyx-agentbook` folder:
+Open terminal in the `agentbook` folder:
 
 ```bash
 docker compose up -d
@@ -81,7 +81,7 @@ docker compose up -d
 Wait 15-20 seconds for all services to start:
 ```
 ✅ surrealdb running on :8000
-✅ autonomyx_agentbook running on :8502 (UI) and :5055 (API)
+✅ agentbook running on :8502 (UI) and :5055 (API)
 ```
 
 Check status:
@@ -105,7 +105,7 @@ Open browser to:
 http://localhost:8502
 ```
 
-You should see the Autonomyx AgentBook interface!
+You should see the AgentBook interface!
 
 ---
 
@@ -136,7 +136,7 @@ Your models are now available!
 3. Description: "Getting started"
 4. Click **Create**
 
-Done! You now have a fully working Autonomyx AgentBook instance.
+Done! You now have a fully working AgentBook instance.
 
 ---
 
@@ -148,7 +148,7 @@ Instead of manually editing, use our ready-made example:
 
 ```bash
 # Download the Ollama example
-curl -o docker-compose.yml https://raw.githubusercontent.com/autonomyx/agentbook/main/examples/docker-compose-ollama.yml
+curl -o docker-compose.yml https://raw.githubusercontent.com/agentnxt/agentbook/main/examples/docker-compose-ollama.yml
 
 # Or copy from repo
 cp examples/docker-compose-ollama.yml docker-compose.yml
@@ -174,7 +174,7 @@ volumes:
 Then restart and pull a model:
 ```bash
 docker compose restart
-docker exec autonomyx-agentbook-local-ollama-1 ollama pull mistral
+docker exec agentbook-local-ollama-1 ollama pull mistral
 ```
 
 Configure Ollama in the Settings UI:
@@ -194,8 +194,8 @@ Configure Ollama in the Settings UI:
 | `SURREAL_URL` | Database connection | `ws://surrealdb:8000/rpc` |
 | `SURREAL_USER` | Database user | `root` |
 | `SURREAL_PASSWORD` | Database password | `root` |
-| `SURREAL_NAMESPACE` | Database namespace | `autonomyx_agentbook` |
-| `SURREAL_DATABASE` | Database name | `autonomyx_agentbook` |
+| `SURREAL_NAMESPACE` | Database namespace | `agentbook` |
+| `SURREAL_DATABASE` | Database name | `agentbook` |
 | `API_URL` | API external URL | `http://localhost:5055` |
 
 See [Environment Reference](../5-CONFIGURATION/environment-reference.md) for complete list.
@@ -354,5 +354,5 @@ For production use, see:
 ## Getting Help
 
 - **Discord**: [Community support](https://discord.gg/37XJPXfz2w)
-- **Issues**: [GitHub Issues](https://github.com/autonomyx/agentbook/issues)
+- **Issues**: [GitHub Issues](https://github.com/agentnxt/agentbook/issues)
 - **Docs**: [Full documentation](../index.md)

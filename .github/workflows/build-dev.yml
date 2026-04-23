@@ -27,7 +27,7 @@ concurrency:
 
 env:
   GHCR_IMAGE: ghcr.io/agentnxt/agentbook
-  DOCKERHUB_IMAGE: autonomyx/agentbook
+  DOCKERHUB_IMAGE: agentnxt/agentbook
 
 jobs:
   extract-version:

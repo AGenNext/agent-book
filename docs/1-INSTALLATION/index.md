@@ -132,7 +132,7 @@ Once you're up and running:
 ## Need Help?
 
 - **Discord**: [Join community](https://discord.gg/37XJPXfz2w)
-- **GitHub Issues**: [Report problems](https://github.com/autonomyx/agentbook/issues)
+- **GitHub Issues**: [Report problems](https://github.com/agentnxt/agentbook/issues)
 - **Docs**: See [Full Documentation](../index.md)
 
 ---

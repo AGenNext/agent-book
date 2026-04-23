@@ -1,6 +1,6 @@
 # Configuration - Essential Settings
 
-Configuration is how you customize Autonomyx AgentBook for your specific setup. This section covers what you need to know.
+Configuration is how you customize AgentBook for your specific setup. This section covers what you need to know.
 
 ---
 
@@ -46,7 +46,7 @@ Use the right file depending on your setup.
 
 ### `.env` (Local Development)
 
-You will only use .env if you are running Autonomyx AgentBook locally.
+You will only use .env if you are running AgentBook locally.
 
 ```
 Located in: project root
@@ -79,8 +79,8 @@ This is the database used by the app.
 SURREAL_URL=ws://surrealdb:8000/rpc
 SURREAL_USER=root
 SURREAL_PASSWORD=root  # Change in production!
-SURREAL_NAMESPACE=autonomyx_agentbook
-SURREAL_DATABASE=autonomyx_agentbook
+SURREAL_NAMESPACE=agentbook
+SURREAL_DATABASE=agentbook
 ```
 
 > The only thing that is critical to not miss is the hostname in the `SURREAL_URL`. Check what URL to use based on your deployment, [here](database.md).
@@ -241,7 +241,7 @@ OPEN_NOTEBOOK_ENCRYPTION_KEY=my-secret-key
 The recommended way to configure AI providers:
 
 ```
-1. Open Autonomyx AgentBook in your browser
+1. Open AgentBook in your browser
 2. Go to Settings → API Keys
 3. Click "Add Credential"
 4. Select provider, enter API key

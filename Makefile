@@ -6,8 +6,8 @@
 VERSION := $(shell grep -m1 version pyproject.toml | cut -d'"' -f2)
 
 # Image names for both registries
-DOCKERHUB_IMAGE := lfnovo/autonomyx_agentbook
-GHCR_IMAGE := ghcr.io/lfnovo/autonomyx-agentbook
+DOCKERHUB_IMAGE := agentnxt/agentbook
+GHCR_IMAGE := ghcr.io/agentnxt/agentbook
 
 # Build platforms
 PLATFORMS := linux/amd64,linux/arm64
