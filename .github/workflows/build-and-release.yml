@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  GHCR_IMAGE: ghcr.io/autonomyx/agentbook
+  GHCR_IMAGE: ghcr.io/agentnxt/agentbook
   DOCKERHUB_IMAGE: autonomyx/agentbook
 
 jobs:
