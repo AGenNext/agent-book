@@ -50,9 +50,10 @@ export function NotesColumn({
 
   // Collapsible column state
   const { notesCollapsed, toggleNotes } = useNotebookColumnsStore()
+  const notesLabel = t('common.notes')
   const collapseButton = useMemo(
-    () => createCollapseButton(toggleNotes, t('common.notes')),
-    [toggleNotes, t('common.notes')]
+    () => createCollapseButton(toggleNotes, notesLabel),
+    [toggleNotes, notesLabel]
   )
 
   const handleDeleteClick = (noteId: string) => {

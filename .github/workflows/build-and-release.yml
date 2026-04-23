@@ -15,6 +15,10 @@ permissions:
   contents: read
   packages: write
 
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 env:
   GHCR_IMAGE: ghcr.io/autonomyx/agentbook
   DOCKERHUB_IMAGE: autonomyx/agentbook
@@ -42,7 +46,7 @@ jobs:
           SECRET_DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           SECRET_DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          if [[ -n ""$SECRET_DOCKER_USERNAME"" && -n ""$SECRET_DOCKER_PASSWORD"" ]]; then
+          if [[ -n "$SECRET_DOCKER_USERNAME" && -n "$SECRET_DOCKER_PASSWORD" ]]; then
             echo "has_dockerhub_secrets=true" >> $GITHUB_OUTPUT
             echo "Docker Hub credentials available"
           else
@@ -84,7 +88,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Cache Docker layers
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-regular-${{ github.sha }}
@@ -100,25 +104,25 @@ jobs:
           GITHUB_EVENT_RELEASE_PRERELEASE: ${{ github.event.release.prerelease }}
           ENV_DOCKERHUB_IMAGE: ${{ env.DOCKERHUB_IMAGE }}
         run: |
-          TAGS=""$ENV_GHCR_IMAGE":${{ needs.extract-version.outputs.version }}"
+          TAGS="$ENV_GHCR_IMAGE:${{ needs.extract-version.outputs.version }}"
 
           # Determine if we should push latest tags
-          PUSH_LATEST=""$GITHUB_EVENT_INPUTS_PUSH_LATEST""
+          PUSH_LATEST="$GITHUB_EVENT_INPUTS_PUSH_LATEST"
           if [[ -z "$PUSH_LATEST" ]]; then
             PUSH_LATEST="false"
           fi
 
           # Add GHCR latest tag if requested or for non-prerelease releases
-          if [[ "$PUSH_LATEST" == "true" ]] || [[ ""$GITHUB_EVENT_NAME"" == "release" && ""$GITHUB_EVENT_RELEASE_PRERELEASE"" != "true" ]]; then
-            TAGS="${TAGS},"$ENV_GHCR_IMAGE":v1-latest"
+          if [[ "$PUSH_LATEST" == "true" ]] || [[ "$GITHUB_EVENT_NAME" == "release" && "$GITHUB_EVENT_RELEASE_PRERELEASE" != "true" ]]; then
+            TAGS="${TAGS},$ENV_GHCR_IMAGE:v1-latest"
           fi
 
           # Add Docker Hub tags if credentials available
           if [[ "${{ needs.extract-version.outputs.has_dockerhub_secrets }}" == "true" ]]; then
-            TAGS="${TAGS},"$ENV_DOCKERHUB_IMAGE":${{ needs.extract-version.outputs.version }}"
+            TAGS="${TAGS},$ENV_DOCKERHUB_IMAGE:${{ needs.extract-version.outputs.version }}"
 
-            if [[ "$PUSH_LATEST" == "true" ]] || [[ ""$GITHUB_EVENT_NAME"" == "release" && ""$GITHUB_EVENT_RELEASE_PRERELEASE"" != "true" ]]; then
-              TAGS="${TAGS},"$ENV_DOCKERHUB_IMAGE":v1-latest"
+            if [[ "$PUSH_LATEST" == "true" ]] || [[ "$GITHUB_EVENT_NAME" == "release" && "$GITHUB_EVENT_RELEASE_PRERELEASE" != "true" ]]; then
+              TAGS="${TAGS},$ENV_DOCKERHUB_IMAGE:v1-latest"
             fi
           fi
 
@@ -175,7 +179,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Cache Docker layers
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache-single
           key: ${{ runner.os }}-buildx-single-${{ github.sha }}
@@ -191,25 +195,25 @@ jobs:
           GITHUB_EVENT_RELEASE_PRERELEASE: ${{ github.event.release.prerelease }}
           ENV_DOCKERHUB_IMAGE: ${{ env.DOCKERHUB_IMAGE }}
         run: |
-          TAGS=""$ENV_GHCR_IMAGE":${{ needs.extract-version.outputs.version }}-single"
+          TAGS="$ENV_GHCR_IMAGE:${{ needs.extract-version.outputs.version }}-single"
 
           # Determine if we should push latest tags
-          PUSH_LATEST=""$GITHUB_EVENT_INPUTS_PUSH_LATEST""
+          PUSH_LATEST="$GITHUB_EVENT_INPUTS_PUSH_LATEST"
           if [[ -z "$PUSH_LATEST" ]]; then
             PUSH_LATEST="false"
           fi
 
           # Add GHCR latest tag if requested or for non-prerelease releases
-          if [[ "$PUSH_LATEST" == "true" ]] || [[ ""$GITHUB_EVENT_NAME"" == "release" && ""$GITHUB_EVENT_RELEASE_PRERELEASE"" != "true" ]]; then
-            TAGS="${TAGS},"$ENV_GHCR_IMAGE":v1-latest-single"
+          if [[ "$PUSH_LATEST" == "true" ]] || [[ "$GITHUB_EVENT_NAME" == "release" && "$GITHUB_EVENT_RELEASE_PRERELEASE" != "true" ]]; then
+            TAGS="${TAGS},$ENV_GHCR_IMAGE:v1-latest-single"
           fi
 
           # Add Docker Hub tags if credentials available
           if [[ "${{ needs.extract-version.outputs.has_dockerhub_secrets }}" == "true" ]]; then
-            TAGS="${TAGS},"$ENV_DOCKERHUB_IMAGE":${{ needs.extract-version.outputs.version }}-single"
+            TAGS="${TAGS},$ENV_DOCKERHUB_IMAGE:${{ needs.extract-version.outputs.version }}-single"
 
-            if [[ "$PUSH_LATEST" == "true" ]] || [[ ""$GITHUB_EVENT_NAME"" == "release" && ""$GITHUB_EVENT_RELEASE_PRERELEASE"" != "true" ]]; then
-              TAGS="${TAGS},"$ENV_DOCKERHUB_IMAGE":v1-latest-single"
+            if [[ "$PUSH_LATEST" == "true" ]] || [[ "$GITHUB_EVENT_NAME" == "release" && "$GITHUB_EVENT_RELEASE_PRERELEASE" != "true" ]]; then
+              TAGS="${TAGS},$ENV_DOCKERHUB_IMAGE:v1-latest-single"
             fi
           fi
 

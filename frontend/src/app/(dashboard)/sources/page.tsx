@@ -20,6 +20,7 @@ import { getApiErrorKey } from '@/lib/utils/error-handler'
 
 export default function SourcesPage() {
   const { t, language } = useTranslation()
+  const failedToLoadLabel = t('sources.failedToLoad')
   const [sources, setSources] = useState<SourceListResponse[]>([])
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
@@ -75,20 +76,19 @@ export default function SourcesPage() {
       offsetRef.current += data.length
     } catch (err) {
       console.error('Failed to fetch sources:', err)
-      setError(t('sources.failedToLoad'))
-      toast.error(t('sources.failedToLoad'))
+      setError(failedToLoadLabel)
+      toast.error(failedToLoadLabel)
     } finally {
       setLoading(false)
       setLoadingMore(false)
       loadingMoreRef.current = false
     }
-  }, [sortBy, sortOrder, t('sources.failedToLoad')])
+  }, [sortBy, sortOrder, failedToLoadLabel])
 
   // Initial load and when sort changes
   useEffect(() => {
     fetchSources(true)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy, sortOrder])
+  }, [fetchSources])
 
   useEffect(() => {
     // Focus the table when component mounts or sources change

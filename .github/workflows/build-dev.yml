@@ -1,15 +1,10 @@
 name: Development Build
 
 on:
-  pull_request:
-    branches: [ main ]
-  push:
-    branches: [ main ]
-    paths-ignore:
-      - '**.md'
-      - 'docs/**'
-      - 'notebooks/**'
-      - '.github/workflows/claude*.yml'
+  workflow_run:
+    workflows: ["Tests"]
+    branches: [main]
+    types: [completed]
   workflow_dispatch:
     inputs:
       platform:
@@ -26,12 +21,17 @@ permissions:
   contents: read
   packages: write
 
+concurrency:
+  group: cd-dev-${{ github.event.workflow_run.head_branch || github.ref }}
+  cancel-in-progress: true
+
 env:
   GHCR_IMAGE: ghcr.io/autonomyx/agentbook
   DOCKERHUB_IMAGE: autonomyx/agentbook
 
 jobs:
   extract-version:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
@@ -40,6 +40,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Extract version from pyproject.toml
         id: version
@@ -63,13 +65,13 @@ jobs:
             echo "Docker Hub credentials not available"
           fi
 
-          # Check if this is a push to main (not a PR)
-          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
+          # workflow_run means CI passed on main, so this is allowed to publish dev tags.
+          if [[ "${{ github.event_name }}" == "workflow_run" && "${{ github.event.workflow_run.head_branch }}" == "main" ]]; then
             echo "is_push_to_main=true" >> $GITHUB_OUTPUT
-            echo "This is a push to main - will publish v1-dev tags"
+            echo "CI passed on main - will publish v1-dev tags"
           else
             echo "is_push_to_main=false" >> $GITHUB_OUTPUT
-            echo "This is a PR or manual run - test build only"
+            echo "Manual run - test build only"
           fi
 
   build-regular:
@@ -78,6 +80,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Free up disk space
         if: needs.extract-version.outputs.is_push_to_main == 'true'
@@ -108,7 +112,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Cache Docker layers
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache-dev
           key: ${{ runner.os }}-buildx-dev-${{ github.sha }}
@@ -158,6 +162,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Free up disk space
         run: |
@@ -186,7 +192,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Cache Docker layers
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache-dev-single
           key: ${{ runner.os }}-buildx-dev-single-${{ github.sha }}

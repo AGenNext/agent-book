@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useParams } from 'next/navigation'
 import { AppShell } from '@/components/layout/AppShell'
 import { NotebookHeader } from '../components/NotebookHeader'
@@ -52,6 +52,7 @@ export default function NotebookPage() {
     fetchNextPage,
   } = useNotebookSources(notebookId)
   const { data: notes, isLoading: notesLoading } = useNotes(notebookId)
+  const noteList = useMemo(() => notes ?? [], [notes])
 
   const { sourcesCollapsed, notesCollapsed } = useNotebookColumnsStore()
   const isDesktop = useIsDesktop()
@@ -83,10 +84,10 @@ export default function NotebookPage() {
   }, [sources])
 
   useEffect(() => {
-    if (notes && notes.length > 0) {
+    if (noteList.length > 0) {
       setContextSelections(prev => {
         const newNoteSelections = { ...prev.notes }
-        notes.forEach(note => {
+        noteList.forEach(note => {
           if (!(note.id in newNoteSelections)) {
             newNoteSelections[note.id] = 'full'
           }
@@ -94,7 +95,7 @@ export default function NotebookPage() {
         return { ...prev, notes: newNoteSelections }
       })
     }
-  }, [notes])
+  }, [noteList])
 
   const handleContextModeChange = (itemId: string, mode: ContextMode, type: 'source' | 'note') => {
     setContextSelections(prev => ({
@@ -148,7 +149,7 @@ export default function NotebookPage() {
             </TabsList>
 
             <TabsContent value="overview" className="overflow-y-auto">
-              <WorkspaceOverview workspace={notebook} sources={sources} notes={notes} />
+              <WorkspaceOverview workspace={notebook} sources={sources} notes={noteList} />
             </TabsContent>
 
             <TabsContent value="chat" className="h-full min-h-0">
