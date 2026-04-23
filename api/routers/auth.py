@@ -1,5 +1,5 @@
 """
-Authentication router for Open Notebook API.
+Authentication router for Autonomyx AgentBook API.
 Provides endpoints to check authentication status.
 """
 

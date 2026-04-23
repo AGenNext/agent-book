@@ -1,4 +1,4 @@
-# Contributing to Open Notebook
+# Contributing to Autonomyx AgentBook
 
 **📍 This file has moved!**
 

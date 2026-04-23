@@ -118,7 +118,7 @@ FastAPI exception handlers map custom exception types from `open_notebook.except
 | `ConfigurationError` | 422 | Wrong model name, missing config |
 | `NetworkError` | 502 | Cannot reach AI provider |
 | `ExternalServiceError` | 502 | Provider returned error (500/503, context length) |
-| `OpenNotebookError` (base) | 500 | Any other application error |
+| `AutonomyxAgentBookError` (base) | 500 | Any other application error |
 
 ### Error Classification (`open_notebook.utils.error_classifier`)
 

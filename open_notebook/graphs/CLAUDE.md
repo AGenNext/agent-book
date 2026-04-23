@@ -23,7 +23,7 @@ LangGraph-based workflow orchestration for content processing, chat interactions
 
 ## Error Handling in Graphs
 
-All graph nodes use `classify_error()` from `open_notebook.utils.error_classifier` to catch raw LLM provider exceptions and re-raise them as typed `OpenNotebookError` subclasses with user-friendly messages. This ensures that errors from any AI provider (authentication failures, rate limits, model not found, network issues) are surfaced to the user with actionable messages instead of opaque stack traces.
+All graph nodes use `classify_error()` from `open_notebook.utils.error_classifier` to catch raw LLM provider exceptions and re-raise them as typed `AutonomyxAgentBookError` subclasses with user-friendly messages. This ensures that errors from any AI provider (authentication failures, rate limits, model not found, network issues) are surfaced to the user with actionable messages instead of opaque stack traces.
 
 **Pattern in nodes**:
 ```python

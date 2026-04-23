@@ -1,10 +1,10 @@
-# Open Notebook - Root CLAUDE.md
+# Autonomyx AgentBook - Root CLAUDE.md
 
-This file provides architectural guidance for contributors working on Open Notebook at the project level.
+This file provides architectural guidance for contributors working on Autonomyx AgentBook at the project level.
 
 ## Project Overview
 
-**Open Notebook** is an open-source, privacy-focused alternative to Google's Notebook LM. It's an AI-powered research assistant enabling users to upload multi-modal content (PDFs, audio, video, web pages), generate intelligent notes, search semantically, chat with AI models, and produce professional podcasts—all with complete control over data and choice of AI providers.
+**Autonomyx AgentBook** is an open-source, privacy-focused alternative to Google NotebookLM. It's an AI-powered research assistant enabling users to upload multi-modal content (PDFs, audio, video, web pages), generate intelligent notes, search semantically, chat with AI models, and produce professional podcasts—all with complete control over data and choice of AI providers.
 
 **Key Values**: Privacy-first, multi-provider AI support, fully self-hosted option, open-source transparency.
 
@@ -110,7 +110,7 @@ User documentation is at @docs/
 - **Transactions**: Repo functions handle ACID operations
 
 ### 5. Error Handling
-- **Custom exceptions** (`exceptions.py`): Hierarchy rooted at `OpenNotebookError` with typed subclasses (`AuthenticationError`, `ConfigurationError`, `RateLimitError`, `ExternalServiceError`, `NetworkError`, etc.)
+- **Custom exceptions** (`exceptions.py`): Hierarchy rooted at `AutonomyxAgentBookError` with typed subclasses (`AuthenticationError`, `ConfigurationError`, `RateLimitError`, `ExternalServiceError`, `NetworkError`, etc.)
 - **Error classification** (`utils/error_classifier.py`): `classify_error()` maps raw LLM provider exceptions to typed exceptions with user-friendly messages via keyword matching
 - **Global handlers**: FastAPI exception handlers in `api/main.py` convert typed exceptions to appropriate HTTP status codes (401, 422, 429, 502, etc.)
 
@@ -217,9 +217,9 @@ See dedicated CLAUDE.md files for detailed guidance:
 
 ## Support & Community
 
-- **Documentation**: https://open-notebook.ai
+- **Documentation**: https://autonomyx.ai/agentbook
 - **Discord**: https://discord.gg/37XJPXfz2w
-- **Issues**: https://github.com/lfnovo/open-notebook/issues
+- **Issues**: https://github.com/autonomyx/agentbook/issues
 - **License**: MIT (see LICENSE)
 
 
