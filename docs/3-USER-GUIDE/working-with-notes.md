@@ -193,7 +193,7 @@ When to use:
 
 ### Built-in Transformations
 
-Open Notebook comes with presets:
+Autonomyx AgentBook comes with presets:
 
 **Summary**
 ```

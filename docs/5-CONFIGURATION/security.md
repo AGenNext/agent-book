@@ -1,12 +1,12 @@
 # Security Configuration
 
-Protect your Open Notebook deployment with password authentication and production hardening.
+Protect your Autonomyx AgentBook deployment with password authentication and production hardening.
 
 ---
 
 ## API Key Encryption
 
-Open Notebook encrypts API keys stored in the database using Fernet symmetric encryption (AES-128-CBC with HMAC-SHA256).
+Autonomyx AgentBook encrypts API keys stored in the database using Fernet symmetric encryption (AES-128-CBC with HMAC-SHA256).
 
 ### Configuration Methods
 
@@ -30,7 +30,7 @@ Any string works — it will be securely derived via SHA-256 internally. Use a s
 
 | Setting | Default | Security Level |
 |---------|---------|----------------|
-| Password | `open-notebook-change-me` | Development only |
+| Password | `autonomyx-agentbook-change-me` | Development only |
 | Encryption Key | **None** (must be configured) | Required for API key storage |
 
 **The encryption key has no default.** You must set `OPEN_NOTEBOOK_ENCRYPTION_KEY` before using the API key configuration feature. Without it, encrypting/decrypting API keys will fail.
@@ -84,8 +84,8 @@ environment:
 ```yaml
 # Add to your docker-compose.yml (requires surrealdb service, see installation guide)
 services:
-  open_notebook:
-    image: lfnovo/open_notebook:v1-latest
+  autonomyx_agentbook:
+    image: autonomyx/agentbook:v1-latest
     pull_policy: always
     environment:
       - OPEN_NOTEBOOK_ENCRYPTION_KEY=your-secret-encryption-key
@@ -197,7 +197,7 @@ curl -X POST \
 ```python
 import requests
 
-class OpenNotebookClient:
+class AutonomyxAgentBookClient:
     def __init__(self, base_url: str, password: str):
         self.base_url = base_url
         self.headers = {"Authorization": f"Bearer {password}"}
@@ -218,7 +218,7 @@ class OpenNotebookClient:
         return response.json()
 
 # Usage
-client = OpenNotebookClient("http://localhost:5055", "your_password")
+client = AutonomyxAgentBookClient("http://localhost:5055", "your_password")
 notebooks = client.get_notebooks()
 ```
 
@@ -247,8 +247,8 @@ async function getNotebooks() {
 ```yaml
 # Add to your docker-compose.yml (requires surrealdb service, see installation guide)
 services:
-  open_notebook:
-    image: lfnovo/open_notebook:v1-latest
+  autonomyx_agentbook:
+    image: autonomyx/agentbook:v1-latest
     pull_policy: always
     ports:
       - "127.0.0.1:8502:8502"  # Bind to localhost only
@@ -291,7 +291,7 @@ See [Reverse Proxy Configuration](reverse-proxy.md) for complete nginx/Caddy/Tra
 
 ## Security Limitations
 
-Open Notebook's password protection provides **basic access control**, not enterprise-grade security:
+Autonomyx AgentBook's password protection provides **basic access control**, not enterprise-grade security:
 
 | Feature | Status |
 |---------|--------|
@@ -334,10 +334,10 @@ For deployments requiring advanced security:
 
 ```bash
 # Check env var is set
-docker exec open-notebook env | grep OPEN_NOTEBOOK_PASSWORD
+docker exec autonomyx-agentbook env | grep OPEN_NOTEBOOK_PASSWORD
 
 # Check logs
-docker logs open-notebook | grep -i auth
+docker logs autonomyx-agentbook | grep -i auth
 
 # Test API directly
 curl -H "Authorization: Bearer your_password" \

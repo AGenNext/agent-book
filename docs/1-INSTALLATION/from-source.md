@@ -16,13 +16,13 @@ Clone the repository and run locally. **For developers and contributors.**
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/lfnovo/open-notebook.git
-cd open-notebook
+git clone https://github.com/autonomyx/agentbook.git
+cd autonomyx-agentbook
 
 # If you forked it:
-git clone https://github.com/YOUR_USERNAME/open-notebook.git
-cd open-notebook
-git remote add upstream https://github.com/lfnovo/open-notebook.git
+git clone https://github.com/YOUR_USERNAME/autonomyx-agentbook.git
+cd autonomyx-agentbook
+git remote add upstream https://github.com/autonomyx/agentbook.git
 ```
 
 ### 2. Install Python Dependencies
@@ -38,8 +38,8 @@ If you prefer using **Conda** to manage your environments, follow these steps in
 
 ```bash
 # Create and activate the environment
-conda create -n open-notebook python=3.11 -y
-conda activate open-notebook
+conda create -n autonomyx-agentbook python=3.11 -y
+conda activate autonomyx-agentbook
 
 # Install uv inside conda to maintain compatibility with the Makefile
 conda install -c conda-forge uv nodejs -y
@@ -177,4 +177,4 @@ uv run uvicorn api.main:app --port 5056
 ## Getting Help
 
 - **Discord**: [Community](https://discord.gg/37XJPXfz2w)
-- **Issues**: [GitHub Issues](https://github.com/lfnovo/open-notebook/issues)
+- **Issues**: [GitHub Issues](https://github.com/autonomyx/agentbook/issues)
