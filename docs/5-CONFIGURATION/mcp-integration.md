@@ -1,16 +1,16 @@
 # Model Context Protocol (MCP) Integration
 
-Autonomyx AgentBook can be seamlessly integrated into your AI workflows using the **Model Context Protocol (MCP)**, enabling direct access to your notebooks, sources, and chat functionality from AI assistants like Claude Desktop and VS Code extensions.
+AgentBook can be seamlessly integrated into your AI workflows using the **Model Context Protocol (MCP)**, enabling direct access to your notebooks, sources, and chat functionality from AI assistants like Claude Desktop and VS Code extensions.
 
 ## What is MCP?
 
-The [Model Context Protocol](https://modelcontextprotocol.io) is an open standard that allows AI applications to securely connect to external data sources and tools. With the Autonomyx AgentBook MCP server, you can:
+The [Model Context Protocol](https://modelcontextprotocol.io) is an open standard that allows AI applications to securely connect to external data sources and tools. With the AgentBook MCP server, you can:
 
 - 📚 **Access your notebooks** directly from Claude Desktop or VS Code
 - 🔍 **Search your research content** without leaving your AI assistant
 - 💬 **Create and manage chat sessions** with your research as context
 - 📝 **Generate notes** and insights on-the-fly
-- 🤖 **Automate workflows** using the full Autonomyx AgentBook API
+- 🤖 **Automate workflows** using the full AgentBook API
 
 ## Quick Setup
 
@@ -29,9 +29,9 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
    ```json
    {
      "mcpServers": {
-       "autonomyx-agentbook": {
+       "agentbook": {
          "command": "uvx",
-         "args": ["autonomyx-agentbook-mcp"],
+         "args": ["agentbook-mcp"],
          "env": {
            "OPEN_NOTEBOOK_URL": "http://localhost:5055",
            "OPEN_NOTEBOOK_PASSWORD": "your_password_here"
@@ -46,9 +46,9 @@ The [Model Context Protocol](https://modelcontextprotocol.io) is an open standar
    ```json
    {
      "mcpServers": {
-       "autonomyx-agentbook": {
+       "agentbook": {
          "command": "uvx",
-         "args": ["autonomyx-agentbook-mcp"],
+         "args": ["agentbook-mcp"],
          "env": {
            "OPEN_NOTEBOOK_URL": "http://localhost:5055",
            "OPEN_NOTEBOOK_PASSWORD": "your_password_here"
@@ -67,9 +67,9 @@ Add to your VS Code settings or `.vscode/mcp.json`:
 ```json
 {
   "servers": {
-    "autonomyx-agentbook": {
+    "agentbook": {
       "command": "uvx",
-      "args": ["autonomyx-agentbook-mcp"],
+      "args": ["agentbook-mcp"],
       "env": {
         "OPEN_NOTEBOOK_URL": "http://localhost:5055",
         "OPEN_NOTEBOOK_PASSWORD": "your_password_here"
@@ -81,12 +81,12 @@ Add to your VS Code settings or `.vscode/mcp.json`:
 
 ## Configuration
 
-- **OPEN_NOTEBOOK_URL**: URL to your Autonomyx AgentBook API (default: `http://localhost:5055`)
+- **OPEN_NOTEBOOK_URL**: URL to your AgentBook API (default: `http://localhost:5055`)
 - **OPEN_NOTEBOOK_PASSWORD**: Optional - only needed if you've enabled password protection
 
 ### For Remote Servers
 
-If your Autonomyx AgentBook instance is running on a remote server, update the URL accordingly:
+If your AgentBook instance is running on a remote server, update the URL accordingly:
 
 ```json
 "OPEN_NOTEBOOK_URL": "http://192.168.1.100:5055"
@@ -110,11 +110,11 @@ Once connected, you can ask Claude or your AI assistant to:
 - _"Add this PDF to my research notebook"_
 - _"Show me all notes in [notebook name]"_
 
-The MCP server provides full access to Autonomyx AgentBook's capabilities, allowing you to manage your research seamlessly from within your AI assistant.
+The MCP server provides full access to AgentBook's capabilities, allowing you to manage your research seamlessly from within your AI assistant.
 
 ## Available Tools
 
-The Autonomyx AgentBook MCP server exposes these capabilities:
+The AgentBook MCP server exposes these capabilities:
 
 ### Notebooks
 
@@ -167,19 +167,19 @@ The Autonomyx AgentBook MCP server exposes these capabilities:
 
 ## MCP Server Repository
 
-The Autonomyx AgentBook MCP server is developed and maintained by the Epochal team:
+The AgentBook MCP server is developed and maintained by the Epochal team:
 
-**🔗 GitHub**: [Epochal-dev/autonomyx-agentbook-mcp](https://github.com/Epochal-dev/autonomyx-agentbook-mcp)
+**🔗 GitHub**: [Epochal-dev/agentbook-mcp](https://github.com/Epochal-dev/agentbook-mcp)
 
 Contributions, issues, and feature requests are welcome!
 
 ## Finding the Server
 
-The Autonomyx AgentBook MCP server is published to the official MCP Registry:
+The AgentBook MCP server is published to the official MCP Registry:
 
-- **Registry**: Search for "autonomyx-agentbook" at [registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io)
-- **PyPI**: [pypi.org/project/autonomyx-agentbook-mcp](https://pypi.org/project/autonomyx-agentbook-mcp)
-- **GitHub**: [Epochal-dev/autonomyx-agentbook-mcp](https://github.com/Epochal-dev/autonomyx-agentbook-mcp)
+- **Registry**: Search for "agentbook" at [registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io)
+- **PyPI**: [pypi.org/project/agentbook-mcp](https://pypi.org/project/agentbook-mcp)
+- **GitHub**: [Epochal-dev/agentbook-mcp](https://github.com/Epochal-dev/agentbook-mcp)
 
 ## Troubleshooting
 
@@ -192,7 +192,7 @@ The Autonomyx AgentBook MCP server is published to the official MCP Registry:
 
 ## Using with Other MCP Clients
 
-The Autonomyx AgentBook MCP server follows the standard MCP protocol and can be used with any MCP-compatible client. Check your client's documentation for configuration details.
+The AgentBook MCP server follows the standard MCP protocol and can be used with any MCP-compatible client. Check your client's documentation for configuration details.
 
 ## Learn More
 

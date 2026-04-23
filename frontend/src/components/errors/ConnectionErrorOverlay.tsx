@@ -106,7 +106,7 @@ export function ConnectionErrorOverlay({
         <div className="text-sm">
           <p>{t('connectionErrors.seeDocumentation')}</p>
           <a
-            href="https://github.com/autonomyx/agentbook"
+            href="https://github.com/agentnxt/agentbook"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary hover:underline inline-flex items-center gap-1"

@@ -219,7 +219,7 @@ See dedicated CLAUDE.md files for detailed guidance:
 
 - **Documentation**: https://autonomyx.ai/agentbook
 - **Discord**: https://discord.gg/37XJPXfz2w
-- **Issues**: https://github.com/autonomyx/agentbook/issues
+- **Issues**: https://github.com/agentnxt/agentbook/issues
 - **License**: MIT (see LICENSE)
 
 

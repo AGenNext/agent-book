@@ -11,11 +11,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/autonomyx/agentbook">
+  <a href="https://github.com/agentnxt/agentbook">
     <img src="docs/assets/hero.svg" alt="Logo">
   </a>
 
-  <h3 align="center">Autonomyx AgentBook</h3>
+  <h3 align="center">AgentBook</h3>
 
   <p align="center">
     Enterprise Knowledge Workspace for trusted, source-grounded intelligence.
@@ -35,28 +35,28 @@
 </div>
 
 <p align="center">
-<a href="https://trendshift.io/repositories/14536" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14536" alt="lfnovo%2Fautonomyx-agentbook | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+<a href="https://trendshift.io/repositories/14536" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14536" alt="lfnovo%2Fagentbook | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 </p>
 
 <div align="center">
   <!-- Keep these links. Translations will automatically update with the README. -->
-  <a href="https://zdoc.app/de/lfnovo/autonomyx-agentbook">Deutsch</a> | 
-  <a href="https://zdoc.app/es/lfnovo/autonomyx-agentbook">Español</a> | 
-  <a href="https://zdoc.app/fr/lfnovo/autonomyx-agentbook">français</a> | 
-  <a href="https://zdoc.app/ja/lfnovo/autonomyx-agentbook">日本語</a> | 
-  <a href="https://zdoc.app/ko/lfnovo/autonomyx-agentbook">한국어</a> | 
-  <a href="https://zdoc.app/pt/lfnovo/autonomyx-agentbook">Português</a> | 
-  <a href="https://zdoc.app/ru/lfnovo/autonomyx-agentbook">Русский</a> | 
-  <a href="https://zdoc.app/zh/lfnovo/autonomyx-agentbook">中文</a>
+  <a href="https://zdoc.app/de/lfnovo/agentbook">Deutsch</a> | 
+  <a href="https://zdoc.app/es/lfnovo/agentbook">Español</a> | 
+  <a href="https://zdoc.app/fr/lfnovo/agentbook">français</a> | 
+  <a href="https://zdoc.app/ja/lfnovo/agentbook">日本語</a> | 
+  <a href="https://zdoc.app/ko/lfnovo/agentbook">한국어</a> | 
+  <a href="https://zdoc.app/pt/lfnovo/agentbook">Português</a> | 
+  <a href="https://zdoc.app/ru/lfnovo/agentbook">Русский</a> | 
+  <a href="https://zdoc.app/zh/lfnovo/agentbook">中文</a>
 </div>
 
-## Autonomyx AgentBook — Enterprise Knowledge Workspace
+## AgentBook — Enterprise Knowledge Workspace
 
 ![New Notebook](docs/assets/asset_list.png)
 
 In a world dominated by Artificial Intelligence, having the ability to think 🧠 and acquire new knowledge 💡, is a skill that should not be a privilege for a few, nor restricted to a single provider.
 
-**Autonomyx AgentBook helps teams:**
+**AgentBook helps teams:**
 - 🔒 **Control your data** - Keep your research private and secure
 - 🤖 **Choose your AI models** - Support for 18+ providers including OpenAI, Anthropic, Ollama, LM Studio, and more
 - 📚 **Organize multi-modal content** - PDFs, videos, audio, web pages, and more
@@ -69,9 +69,9 @@ Tagline: **Trusted answers. Reusable intelligence. Grounded in your sources.**
 
 ---
 
-## 🆚 Autonomyx AgentBook vs Google Notebook LM
+## 🆚 AgentBook vs Google Notebook LM
 
-| Feature | Autonomyx AgentBook | Google Notebook LM | Advantage |
+| Feature | AgentBook | Google Notebook LM | Advantage |
 |---------|---------------|--------------------|-----------|
 | **Privacy & Control** | Self-hosted, your data | Google cloud only | Complete data sovereignty |
 | **AI Provider Choice** | 18+ providers (OpenAI, Anthropic, Ollama, LM Studio, etc.) | Google models only | Flexibility and cost optimization |
@@ -83,7 +83,7 @@ Tagline: **Trusted answers. Reusable intelligence. Grounded in your sources.**
 | **Customization** | Open source, fully customizable | Closed system | Unlimited extensibility |
 | **Cost** | Pay only for AI usage | Free tier + Monthly subscription | Transparent and controllable |
 
-**Why Choose Autonomyx AgentBook?**
+**Why Choose AgentBook?**
 - 🔒 **Privacy First**: Your sensitive research stays completely private
 - 💰 **Cost Control**: Choose cheaper AI providers or run locally with Ollama
 - 🎙️ **Better Podcasts**: Full script control and multi-speaker flexibility vs limited 2-speaker deep-dive format
@@ -104,7 +104,7 @@ Tagline: **Trusted answers. Reusable intelligence. Grounded in your sources.**
 
 **Option A:** Download directly
 ```bash
-curl -o docker-compose.yml https://raw.githubusercontent.com/autonomyx/agentbook/main/docker-compose.yml
+curl -o docker-compose.yml https://raw.githubusercontent.com/agentnxt/agentbook/main/docker-compose.yml
 ```
 
 **Option B:** Create the file manually
@@ -122,8 +122,8 @@ services:
       - ./surreal_data:/mydata
     restart: always
 
-  autonomyx_agentbook:
-    image: autonomyx/agentbook:v1-latest
+  agentbook:
+    image: agentnxt/agentbook:v1-latest
     ports:
       - "8502:8502"
       - "5055:5055"
@@ -132,8 +132,8 @@ services:
       - SURREAL_URL=ws://surrealdb:8000/rpc
       - SURREAL_USER=root
       - SURREAL_PASSWORD=root
-      - SURREAL_NAMESPACE=autonomyx_agentbook
-      - SURREAL_DATABASE=autonomyx_agentbook
+      - SURREAL_NAMESPACE=agentbook
+      - SURREAL_DATABASE=agentbook
     volumes:
       - ./notebook_data:/app/data
     depends_on:
@@ -181,16 +181,16 @@ Done! You're ready to create your first notebook.
 
 ### 📖 Need Help?
 
-- **🤖 AI Installation Assistant**: [CustomGPT to help you install](https://chatgpt.com/g/autonomyx-agentbook-installation-assistant)
+- **🤖 AI Installation Assistant**: [CustomGPT to help you install](https://chatgpt.com/g/agentbook-installation-assistant)
 - **🆘 Troubleshooting**: [5-minute troubleshooting guide](docs/6-TROUBLESHOOTING/quick-fixes.md)
 - **💬 Community Support**: [Discord Server](https://discord.gg/37XJPXfz2w)
-- **🐛 Report Issues**: [GitHub Issues](https://github.com/autonomyx/agentbook/issues)
+- **🐛 Report Issues**: [GitHub Issues](https://github.com/agentnxt/agentbook/issues)
 
 ---
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=lfnovo/autonomyx-agentbook&type=date&legend=top-left)](https://www.star-history.com/#lfnovo/autonomyx-agentbook&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=lfnovo/agentbook&type=date&legend=top-left)](https://www.star-history.com/#lfnovo/agentbook&type=date&legend=top-left)
 
 
 ## Provider Support Matrix
@@ -247,7 +247,7 @@ Thanks to the [Esperanto](https://github.com/lfnovo/esperanto) library, we suppo
 ## 📚 Documentation
 
 ### Getting Started
-- **[📖 Introduction](docs/0-START-HERE/index.md)** - Learn what Autonomyx AgentBook offers
+- **[📖 Introduction](docs/0-START-HERE/index.md)** - Learn what AgentBook offers
 - **[⚡ Quick Start](docs/0-START-HERE/quick-start.md)** - Get up and running in 5 minutes
 - **[🔧 Installation](docs/1-INSTALLATION/index.md)** - Comprehensive setup guide
 - **[🎯 Your First Notebook](docs/0-START-HERE/first-notebook.md)** - Step-by-step tutorial
@@ -288,14 +288,14 @@ Thanks to the [Esperanto](https://github.com/lfnovo/esperanto) library, we suppo
 - **Enhanced Citations**: Improved layout and finer control for source citations
 - **Multiple Chat Sessions**: Manage different conversations within notebooks
 
-See the [open issues](https://github.com/autonomyx/agentbook/issues) for a full list of proposed features and known issues.
+See the [open issues](https://github.com/agentnxt/agentbook/issues) for a full list of proposed features and known issues.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## 📖 Need Help?
-- **🤖 AI Installation Assistant**: We have a [CustomGPT built to help you install Autonomyx AgentBook](https://chatgpt.com/g/autonomyx-agentbook-installation-assistant) - it will guide you through each step!
-- **New to Autonomyx AgentBook?** Start with our [Getting Started Guide](docs/0-START-HERE/index.md)
+- **🤖 AI Installation Assistant**: We have a [CustomGPT built to help you install AgentBook](https://chatgpt.com/g/agentbook-installation-assistant) - it will guide you through each step!
+- **New to AgentBook?** Start with our [Getting Started Guide](docs/0-START-HERE/index.md)
 - **Need installation help?** Check our [Installation Guide](docs/1-INSTALLATION/index.md)
 - **Want to see it in action?** Try our [Quick Start Tutorial](docs/0-START-HERE/quick-start.md)
 
@@ -303,13 +303,13 @@ See the [open issues](https://github.com/autonomyx/agentbook/issues) for a full 
 
 ### Join the Community
 - 💬 **[Discord Server](https://discord.gg/37XJPXfz2w)** - Get help, share ideas, and connect with other users
-- 🐛 **[GitHub Issues](https://github.com/autonomyx/agentbook/issues)** - Report bugs and request features
-- ⭐ **Star this repo** - Show your support and help others discover Autonomyx AgentBook
+- 🐛 **[GitHub Issues](https://github.com/agentnxt/agentbook/issues)** - Report bugs and request features
+- ⭐ **Star this repo** - Show your support and help others discover AgentBook
 
 ### Contributing
 We welcome contributions! We're especially looking for help with:
 - **Frontend Development**: Help improve our modern Next.js/React UI
-- **Testing & Bug Fixes**: Make Autonomyx AgentBook more robust
+- **Testing & Bug Fixes**: Make AgentBook more robust
 - **Feature Development**: Build the coolest research tool together
 - **Documentation**: Improve guides and tutorials
 
@@ -323,12 +323,12 @@ See our [Contributing Guide](CONTRIBUTING.md) for detailed information on how to
 
 ## 📄 License
 
-Autonomyx AgentBook is MIT licensed. See the [LICENSE](LICENSE) file for details.
+AgentBook is MIT licensed. See the [LICENSE](LICENSE) file for details.
 
 
 **Community Support**:
 - 💬 [Discord Server](https://discord.gg/37XJPXfz2w) - Get help, share ideas, and connect with users
-- 🐛 [GitHub Issues](https://github.com/autonomyx/agentbook/issues) - Report bugs and request features
+- 🐛 [GitHub Issues](https://github.com/agentnxt/agentbook/issues) - Report bugs and request features
 - 🌐 [Website](https://www.autonomyx.ai/agentbook) - Learn more about the project
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -336,16 +336,16 @@ Autonomyx AgentBook is MIT licensed. See the [LICENSE](LICENSE) file for details
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/lfnovo/autonomyx-agentbook.svg?style=for-the-badge
-[contributors-url]: https://github.com/autonomyx/agentbook/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/lfnovo/autonomyx-agentbook.svg?style=for-the-badge
-[forks-url]: https://github.com/autonomyx/agentbook/network/members
-[stars-shield]: https://img.shields.io/github/stars/lfnovo/autonomyx-agentbook.svg?style=for-the-badge
-[stars-url]: https://github.com/autonomyx/agentbook/stargazers
-[issues-shield]: https://img.shields.io/github/issues/lfnovo/autonomyx-agentbook.svg?style=for-the-badge
-[issues-url]: https://github.com/autonomyx/agentbook/issues
-[license-shield]: https://img.shields.io/github/license/lfnovo/autonomyx-agentbook.svg?style=for-the-badge
-[license-url]: https://github.com/autonomyx/agentbook/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/lfnovo/agentbook.svg?style=for-the-badge
+[contributors-url]: https://github.com/agentnxt/agentbook/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/lfnovo/agentbook.svg?style=for-the-badge
+[forks-url]: https://github.com/agentnxt/agentbook/network/members
+[stars-shield]: https://img.shields.io/github/stars/lfnovo/agentbook.svg?style=for-the-badge
+[stars-url]: https://github.com/agentnxt/agentbook/stargazers
+[issues-shield]: https://img.shields.io/github/issues/lfnovo/agentbook.svg?style=for-the-badge
+[issues-url]: https://github.com/agentnxt/agentbook/issues
+[license-shield]: https://img.shields.io/github/license/lfnovo/agentbook.svg?style=for-the-badge
+[license-url]: https://github.com/agentnxt/agentbook/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/lfnovo
 [product-screenshot]: images/screenshot.png

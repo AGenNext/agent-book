@@ -1,6 +1,6 @@
 # Complete Environment Reference
 
-Comprehensive list of all environment variables available in Autonomyx AgentBook.
+Comprehensive list of all environment variables available in AgentBook.
 
 ---
 
@@ -11,7 +11,7 @@ Comprehensive list of all environment variables available in Autonomyx AgentBook
 | `API_URL` | No | Auto-detected | URL where frontend reaches API (e.g., http://localhost:5055) |
 | `INTERNAL_API_URL` | No | http://localhost:5055 | Internal API URL for Next.js server-side proxying |
 | `API_CLIENT_TIMEOUT` | No | 300 | Client timeout in seconds (how long to wait for API response) |
-| `OPEN_NOTEBOOK_PASSWORD` | No | None | Password to protect Autonomyx AgentBook instance |
+| `OPEN_NOTEBOOK_PASSWORD` | No | None | Password to protect AgentBook instance |
 | `OPEN_NOTEBOOK_ENCRYPTION_KEY` | **Yes** | None | Secret string to encrypt credentials stored in database (any string works). **Required** for the credential system. Supports Docker secrets via `_FILE` suffix. |
 | `HOSTNAME` | No | `0.0.0.0` (in Docker) | Network interface for Next.js to bind to. Default `0.0.0.0` ensures accessibility from reverse proxies |
 
@@ -26,8 +26,8 @@ Comprehensive list of all environment variables available in Autonomyx AgentBook
 | `SURREAL_URL` | Yes | ws://surrealdb:8000/rpc | SurrealDB WebSocket connection URL |
 | `SURREAL_USER` | Yes | root | SurrealDB username |
 | `SURREAL_PASSWORD` | Yes | root | SurrealDB password |
-| `SURREAL_NAMESPACE` | Yes | autonomyx_agentbook | SurrealDB namespace |
-| `SURREAL_DATABASE` | Yes | autonomyx_agentbook | SurrealDB database name |
+| `SURREAL_NAMESPACE` | Yes | agentbook | SurrealDB namespace |
+| `SURREAL_DATABASE` | Yes | agentbook | SurrealDB database name |
 
 ---
 
@@ -124,7 +124,7 @@ NO_PROXY=localhost,127.0.0.1,.local
 | `LANGCHAIN_TRACING_V2` | No | false | Enable LangSmith tracing |
 | `LANGCHAIN_ENDPOINT` | No | https://api.smith.langchain.com | LangSmith endpoint |
 | `LANGCHAIN_API_KEY` | No | None | LangSmith API key |
-| `LANGCHAIN_PROJECT` | No | Autonomyx AgentBook | LangSmith project name |
+| `LANGCHAIN_PROJECT` | No | AgentBook | LangSmith project name |
 
 **Setup:** https://smith.langchain.com/
 
@@ -138,8 +138,8 @@ OPEN_NOTEBOOK_ENCRYPTION_KEY=my-secret-key
 SURREAL_URL=ws://surrealdb:8000/rpc
 SURREAL_USER=root
 SURREAL_PASSWORD=password
-SURREAL_NAMESPACE=autonomyx_agentbook
-SURREAL_DATABASE=autonomyx_agentbook
+SURREAL_NAMESPACE=agentbook
+SURREAL_DATABASE=agentbook
 ```
 Then configure AI providers via **Settings → API Keys** in the browser.
 
@@ -202,7 +202,7 @@ env | grep -E "^[A-Z_]+=" | sort
 
 ## Notes
 
-- **Case-sensitive:** `OPEN_NOTEBOOK_ENCRYPTION_KEY` ≠ `autonomyx_agentbook_encryption_key`
+- **Case-sensitive:** `OPEN_NOTEBOOK_ENCRYPTION_KEY` ≠ `agentbook_encryption_key`
 - **No spaces:** `OPEN_NOTEBOOK_ENCRYPTION_KEY=my-key` not `OPEN_NOTEBOOK_ENCRYPTION_KEY = my-key`
 - **Quote values:** Use quotes for values with spaces: `API_URL="http://my server:5055"`
 - **Restart required:** Changes take effect after restarting services

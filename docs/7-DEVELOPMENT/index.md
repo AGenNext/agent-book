@@ -1,6 +1,6 @@
 # Development
 
-Welcome to the Autonomyx AgentBook development documentation! Whether you're contributing code, understanding our architecture, or maintaining the project, you'll find guidance here.
+Welcome to the AgentBook development documentation! Whether you're contributing code, understanding our architecture, or maintaining the project, you'll find guidance here.
 
 ## 🎯 Pick Your Path
 
@@ -33,7 +33,7 @@ Start with **[Contributing Guide](contributing.md)** for the workflow, then chec
 - Key components and workflows
 - Design patterns we use
 
-For deeper dives, check `/autonomyx_agentbook/` CLAUDE.md for component-specific guidance.
+For deeper dives, check `/agentbook/` CLAUDE.md for component-specific guidance.
 
 ---
 

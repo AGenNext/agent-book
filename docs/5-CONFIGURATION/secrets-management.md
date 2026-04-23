@@ -1,6 +1,6 @@
 # Secrets Management (Autonomyx Standard)
 
-Autonomyx AgentBook supports environment variables, but production deployments should use managed secret storage.
+AgentBook supports environment variables, but production deployments should use managed secret storage.
 
 ## Approved secret managers
 
