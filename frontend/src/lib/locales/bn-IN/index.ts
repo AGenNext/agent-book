@@ -25,6 +25,7 @@ export const bnIN = {
     french: "Français",
     russian: "Русский",
     bengali: "বাংলা",
+    spanish: "Español",
     source: "উৎস",
     notebook: "নোটবুক",
     quickActions: "দ্রুত ক্রিয়া",

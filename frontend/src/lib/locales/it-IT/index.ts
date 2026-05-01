@@ -25,6 +25,7 @@ export const itIT = {
     french: "Français",
     russian: "Русский",
     bengali: "বাংলা",
+    spanish: "Español",
     source: "Fonte",
     notebook: "Quaderno",
     quickActions: "Azioni rapide",
